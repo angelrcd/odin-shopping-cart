@@ -1,3 +1,6 @@
+import { useCart } from "../App";
+
 export default function Cart() {
-  return <div>Cart</div>;
+  const { cart, setCart } = useCart();
+  return <div>{JSON.stringify(cart)}</div>;
 }
