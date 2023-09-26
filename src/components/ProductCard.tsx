@@ -21,12 +21,14 @@ export default function ProductCard({ product }: Props) {
       onPress={() => navigate(id.toString())}
       fullWidth={true}
       isPressable={true}
-      className="py-4">
+      className="py-4 hover:scale-105">
       <CardHeader className="flex-col items-start px-4 pb-0 pt-2">
-        <small className="text-default-500">{category}</small>
+        <small className="text-default-500">
+          {category[0].toLocaleUpperCase() + category.slice(1)}
+        </small>
         <h4 className="text-large font-bold">{title}</h4>
       </CardHeader>
-      <CardBody className="overflow-visible py-2">
+      <CardBody className="justify-center overflow-visible py-2">
         <Image
           alt="Card background"
           className="rounded-xl object-cover"

@@ -8,7 +8,7 @@ import Shop from "./routes/Shop";
 import Product from "./routes/Product";
 import Cart from "./routes/Cart";
 import "./index.css";
-import { categoryLoader } from "./App";
+import { categoryLoader } from "./utils/categoryLoader";
 import { productLoader } from "./utils/productLoader";
 
 const router = createBrowserRouter([

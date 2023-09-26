@@ -19,8 +19,6 @@ interface Props {
 export default function Nav({ cartSize }: Props) {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 
-  const menuItems = ["Home", "Shop", "Cart"];
-
   return (
     <Navbar isMenuOpen={isMenuOpen} onMenuOpenChange={setIsMenuOpen}>
       <NavbarContent>
@@ -32,7 +30,7 @@ export default function Nav({ cartSize }: Props) {
       </NavbarContent>
 
       <NavbarContent justify="end">
-        <NavbarItem className="xs:flex hidden">
+        <NavbarItem className="hidden xs:flex">
           <NavLink
             to="/"
             className={({ isActive, isPending }) =>
@@ -41,7 +39,7 @@ export default function Nav({ cartSize }: Props) {
             Home
           </NavLink>
         </NavbarItem>
-        <NavbarItem className="xs:flex hidden">
+        <NavbarItem className="hidden xs:flex">
           <NavLink
             to="shop"
             className={({ isActive, isPending }) =>
@@ -50,7 +48,7 @@ export default function Nav({ cartSize }: Props) {
             Shop
           </NavLink>
         </NavbarItem>
-        <NavbarItem className="xs:flex hidden">
+        <NavbarItem className="hidden xs:flex">
           <NavLink
             to="/cart"
             className={({ isActive, isPending }) =>
