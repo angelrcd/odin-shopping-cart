@@ -1,12 +1,14 @@
 import { useCart } from "../App";
 import { useLoaderData } from "react-router-dom";
-import { Category } from "../vite-env";
+import { Category, Product } from "../vite-env";
 import { Select, SelectItem } from "@nextui-org/react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { useProducts } from "../utils/useProducts";
 
 export default function Shop() {
-  const [categoryFilter, setCategoryFilter] = useState<string | null>(null);
   const categories = useLoaderData() as Category[];
+  const [categoryFilter, setCategoryFilter] = useState<string | null>(null);
+  const { products, error, loading } = useProducts(categoryFilter);
   const { cart, setCart } = useCart();
 
   return (
@@ -22,6 +24,8 @@ export default function Shop() {
           </SelectItem>
         ))}
       </Select>
+      {loading && <p>Loading...</p>}
+      {products.length > 0 && <p>{JSON.stringify(products)}</p>}
     </main>
   );
 }
