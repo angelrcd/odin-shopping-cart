@@ -4,6 +4,8 @@ import { Category, Product } from "../vite-env";
 import { Select, SelectItem } from "@nextui-org/react";
 import { useState } from "react";
 import { useProducts } from "../utils/useProducts";
+import { Spinner } from "@nextui-org/react";
+import ProductCard from "../components/ProductCard";
 
 export default function Shop() {
   const categories = useLoaderData() as Category[];
@@ -24,8 +26,13 @@ export default function Shop() {
           </SelectItem>
         ))}
       </Select>
-      {loading && <p>Loading...</p>}
-      {products.length > 0 && <p>{JSON.stringify(products)}</p>}
+      {loading && <Spinner className="ml-4" />}
+      <div className="grid grid-cols-1 gap-4 xs:grid-cols-2 md:grid-cols-3">
+        {products.length > 0 &&
+          products.map((product) => (
+            <ProductCard key={product.id} product={product} />
+          ))}
+      </div>
     </main>
   );
 }
