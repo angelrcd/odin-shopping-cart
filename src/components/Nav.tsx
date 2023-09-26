@@ -10,7 +10,7 @@ import {
 } from "@nextui-org/react";
 import { CartIcon } from "./CartIcon";
 import { Badge } from "@nextui-org/react";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 interface Props {
   cartSize: number;
@@ -24,17 +24,15 @@ export default function Nav({ cartSize }: Props) {
   return (
     <Navbar isMenuOpen={isMenuOpen} onMenuOpenChange={setIsMenuOpen}>
       <NavbarContent>
-        <NavbarMenuToggle
-          aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-          className="sm:hidden"
-        />
         <NavbarBrand>
-          <h1>SHOP</h1>
+          <Link to="/">
+            <h1>FAKE STORE</h1>
+          </Link>
         </NavbarBrand>
       </NavbarContent>
 
-      <NavbarContent className="hidden gap-4 sm:flex" justify="center">
-        <NavbarItem>
+      <NavbarContent justify="end">
+        <NavbarItem className="xs:flex hidden">
           <NavLink
             to="/"
             className={({ isActive, isPending }) =>
@@ -43,7 +41,7 @@ export default function Nav({ cartSize }: Props) {
             Home
           </NavLink>
         </NavbarItem>
-        <NavbarItem>
+        <NavbarItem className="xs:flex hidden">
           <NavLink
             to="shop"
             className={({ isActive, isPending }) =>
@@ -52,9 +50,7 @@ export default function Nav({ cartSize }: Props) {
             Shop
           </NavLink>
         </NavbarItem>
-      </NavbarContent>
-      <NavbarContent justify="end">
-        <NavbarItem>
+        <NavbarItem className="xs:flex hidden">
           <NavLink
             to="/cart"
             className={({ isActive, isPending }) =>
@@ -65,20 +61,44 @@ export default function Nav({ cartSize }: Props) {
             </Badge>
           </NavLink>
         </NavbarItem>
+        <NavbarMenuToggle
+          aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+          className="xs:hidden"
+        />
       </NavbarContent>
       <NavbarMenu>
-        {menuItems.map((item, index) => (
-          <NavbarMenuItem key={`${item}-${index}`}>
-            <NavLink
-              onClick={() => setIsMenuOpen(false)}
-              className={({ isActive, isPending }) =>
-                isPending ? "pending" : isActive ? "text-blue-600" : ""
-              }
-              to={item === "Home" ? "/" : item.toLowerCase()}>
-              {item}
-            </NavLink>
+        <NavLink
+          onClick={() => setIsMenuOpen(false)}
+          className={({ isActive, isPending }) =>
+            isPending ? "pending" : isActive ? "text-blue-600" : ""
+          }
+          to="/">
+          <NavbarMenuItem className="">Home</NavbarMenuItem>
+        </NavLink>
+        <NavLink
+          onClick={() => setIsMenuOpen(false)}
+          className={({ isActive, isPending }) =>
+            isPending ? "pending" : isActive ? "text-blue-600" : ""
+          }
+          to="/shop">
+          <NavbarMenuItem>Shop</NavbarMenuItem>
+        </NavLink>
+        <NavLink
+          onClick={() => setIsMenuOpen(false)}
+          className={({ isActive, isPending }) =>
+            isPending ? "pending" : isActive ? "text-blue-600" : ""
+          }
+          to="/cart">
+          <NavbarMenuItem>
+            <Badge
+              color="primary"
+              content={cartSize}
+              shape="circle"
+              className="left-7">
+              Cart
+            </Badge>
           </NavbarMenuItem>
-        ))}
+        </NavLink>
       </NavbarMenu>
     </Navbar>
   );

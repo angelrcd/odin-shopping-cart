@@ -1,7 +1,13 @@
 import { SetStateAction, useState } from "react";
 import Nav from "./components/Nav";
 import { Outlet, useOutletContext } from "react-router-dom";
-import { Product } from "./vite-env";
+import { Product, Category } from "./vite-env";
+
+export async function categoryLoader() {
+  const response = await fetch("https://fakestoreapi.com/products/categories");
+  const categoryData = (await response.json()) as Category[];
+  return categoryData;
+}
 
 export default function App() {
   const [cart, setCart] = useState<Product[]>([]);
@@ -13,7 +19,6 @@ export default function App() {
   );
 }
 
-// eslint-disable-next-line react-refresh/only-export-components
 export function useCart() {
   return useOutletContext<{
     cart: Product[];

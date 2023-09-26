@@ -8,7 +8,7 @@ import Shop from "../src/routes/Shop";
 import Cart from "../src/routes/Cart";
 
 // Provide route where the app is at at render
-function setup(initialRoute: string) {
+function setup(initialRoute: `/${string}`) {
   const router = createMemoryRouter(
     [
       {

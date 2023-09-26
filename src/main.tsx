@@ -7,6 +7,7 @@ import Home from "./routes/Home";
 import Shop from "./routes/Shop";
 import Cart from "./routes/Cart";
 import "./index.css";
+import { categoryLoader } from "./App";
 
 const router = createBrowserRouter([
   {
@@ -14,7 +15,7 @@ const router = createBrowserRouter([
     element: <App />,
     children: [
       { index: true, element: <Home /> },
-      { path: "/shop", element: <Shop /> },
+      { path: "/shop", element: <Shop />, loader: categoryLoader },
       { path: "/cart", element: <Cart /> },
     ],
   },

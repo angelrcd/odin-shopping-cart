@@ -1,4 +1,5 @@
 const { nextui } = require("@nextui-org/react");
+const defaultTheme = require("tailwindcss/defaultTheme");
 
 /** @type {import('tailwindcss').Config} */
 export default {
@@ -8,6 +9,10 @@ export default {
     "./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
+    screens: {
+      xs: "400px",
+      ...defaultTheme.screens,
+    },
     extend: {},
   },
   darkMode: "class",
