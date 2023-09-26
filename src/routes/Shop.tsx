@@ -10,6 +10,7 @@ export default function Shop() {
   const [searchParams, setSearchParams] = useSearchParams();
   const categories = useLoaderData() as Category[];
   const categoryFilter = searchParams.get("category");
+  const sortBySelection = searchParams.get("sort");
   const { products, error, loading } = useProducts(categoryFilter);
 
   if (error) {
@@ -19,7 +20,7 @@ export default function Shop() {
   return (
     <main className="mx-auto max-w-[1024px] px-6">
       <h2>Shop</h2>
-      <div className="mb-6">
+      <div className="mb-6 flex flex-wrap gap-4">
         <Select
           selectedKeys={categoryFilter ? [categoryFilter] : undefined}
           showScrollIndicators={true}
@@ -29,9 +30,11 @@ export default function Shop() {
             console.log(e.target.value);
 
             if (e.target.value) {
-              setSearchParams({ category: e.target.value });
+              searchParams.set("category", e.target.value);
+              setSearchParams(searchParams);
             } else {
-              setSearchParams({});
+              searchParams.delete("category");
+              setSearchParams(searchParams);
             }
           }}>
           {categories.map((category) => (
@@ -40,13 +43,45 @@ export default function Shop() {
             </SelectItem>
           ))}
         </Select>
+
+        <Select
+          selectedKeys={sortBySelection ? [sortBySelection] : undefined}
+          label="Sort by"
+          className="max-w-xs"
+          onChange={(e) => {
+            console.log(e.target.value);
+
+            if (e.target.value) {
+              searchParams.set("sort", e.target.value);
+              setSearchParams(searchParams);
+            } else {
+              searchParams.delete("sort");
+              setSearchParams(searchParams);
+            }
+          }}>
+          <SelectItem key="price" value="price">
+            Price
+          </SelectItem>
+          <SelectItem key="discountPercentage" value="discountPercentage">
+            Discount
+          </SelectItem>
+          <SelectItem key="rating" value="rating">
+            Rating
+          </SelectItem>
+        </Select>
+
         {loading && <Spinner className="ml-4" />}
       </div>
       <div className="grid grid-cols-1 gap-4 xs:grid-cols-2 md:grid-cols-3">
         {products.length > 0 &&
-          products.map((product) => (
-            <ProductCard key={product.id} product={product} />
-          ))}
+          products
+            .sort((a, b) => {
+              if (sortBySelection === "") return 0;
+              return a[sortBySelection] - b[sortBySelection];
+            })
+            .map((product) => (
+              <ProductCard key={product.id} product={product} />
+            ))}
       </div>
     </main>
   );

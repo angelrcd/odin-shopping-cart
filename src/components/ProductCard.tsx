@@ -15,7 +15,8 @@ interface Props {
 
 export default function ProductCard({ product }: Props) {
   const navigate = useNavigate();
-  const { id, title, price, category, thumbnail } = product;
+  const { id, title, price, category, thumbnail, discountPercentage, rating } =
+    product;
   return (
     <Card
       onPress={() => navigate(id.toString())}
@@ -38,6 +39,9 @@ export default function ProductCard({ product }: Props) {
       </CardBody>
       <CardFooter className="flex justify-between">
         <Chip color="primary">${price}</Chip>
+        <p>
+          -{discountPercentage}% - Rating: {rating}
+        </p>
       </CardFooter>
     </Card>
   );
