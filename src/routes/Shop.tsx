@@ -17,10 +17,12 @@ export default function Shop() {
       <h2>Shop</h2>
       <div className="mb-6">
         <Select
-          selectedKeys={[categoryFilter!]}
+          selectedKeys={categoryFilter ? [categoryFilter] : undefined}
           label="Filter by category"
           className="max-w-xs"
           onChange={(e) => {
+            console.log(e.target.value);
+
             if (e.target.value) {
               setSearchParams({ category: e.target.value });
             } else {
