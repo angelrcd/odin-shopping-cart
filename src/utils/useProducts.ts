@@ -2,35 +2,32 @@ import { useState, useEffect } from "react";
 import { Product } from "../vite-env";
 
 function isProduct(obj: unknown): obj is Product {
-  if (
-    obj &&
+  return (
+    obj !== null &&
     typeof obj === "object" &&
     "id" in obj &&
-    typeof obj.id === "number" &&
     "title" in obj &&
     typeof obj.title === "string" &&
-    "price" in obj &&
-    typeof obj.price === "number" &&
     "description" in obj &&
     typeof obj.description === "string" &&
+    "price" in obj &&
+    typeof obj.price === "number" &&
+    "discountPercentage" in obj &&
+    typeof obj.discountPercentage === "number" &&
+    "rating" in obj &&
+    typeof obj.rating === "number" &&
+    "stock" in obj &&
+    typeof obj.stock === "number" &&
+    "brand" in obj &&
+    typeof obj.brand === "string" &&
     "category" in obj &&
     typeof obj.category === "string" &&
-    "image" in obj &&
-    typeof obj.image === "string" &&
-    "rating" in obj &&
-    typeof obj.rating === "object"
-  ) {
-    const rating = obj.rating;
-    if (
-      "rate" in rating! &&
-      typeof rating.rate === "number" &&
-      "count" in rating &&
-      typeof rating.count === "number"
-    ) {
-      return true;
-    }
-  }
-  return false;
+    "thumbnail" in obj &&
+    typeof obj.thumbnail === "string" &&
+    "images" in obj &&
+    Array.isArray(obj.images) &&
+    obj.images.every((image: unknown) => typeof image === "string")
+  );
 }
 
 export const useProducts = (category: string | null) => {
@@ -39,20 +36,25 @@ export const useProducts = (category: string | null) => {
   const [loading, setLoading] = useState(true);
 
   const url = category
-    ? `https://fakestoreapi.com/products/category/${category}`
-    : "https://fakestoreapi.com/products";
+    ? `https://dummyjson.com/products/category/${category}`
+    : "https://dummyjson.com/products?limit=0";
 
   useEffect(() => {
     fetch(url)
       .then((response) => response.json())
-      .then((data: unknown[]) => {
-        if (data.every(isProduct)) {
-          setProducts(data);
+      .then((data: { products: unknown[] }) => {
+        const products = data.products;
+
+        if (products.every(isProduct)) {
+          setProducts(products);
         } else {
           throw new Error("unexpected response");
         }
       })
-      .catch((err: string) => setError(err))
+      .catch((err: string) => {
+        console.log(err);
+        setError(err);
+      })
       .finally(() => setLoading(false));
 
     return () => {

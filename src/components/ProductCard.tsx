@@ -15,7 +15,7 @@ interface Props {
 
 export default function ProductCard({ product }: Props) {
   const navigate = useNavigate();
-  const { id, title, price, category, rating, image } = product;
+  const { id, title, price, category, thumbnail } = product;
   return (
     <Card
       onPress={() => navigate(id.toString())}
@@ -32,15 +32,12 @@ export default function ProductCard({ product }: Props) {
         <Image
           alt="Card background"
           className="rounded-xl object-cover"
-          src={image}
+          src={thumbnail}
           width={270}
         />
       </CardBody>
       <CardFooter className="flex justify-between">
         <Chip color="primary">${price}</Chip>
-        <p>
-          {rating.rate} ({rating.count})
-        </p>
       </CardFooter>
     </Card>
   );

@@ -12,12 +12,17 @@ export default function Shop() {
   const categoryFilter = searchParams.get("category");
   const { products, error, loading } = useProducts(categoryFilter);
 
+  if (error) {
+    return <p>Unexpected error</p>;
+  }
+
   return (
     <main className="mx-auto max-w-[1024px] px-6">
       <h2>Shop</h2>
       <div className="mb-6">
         <Select
           selectedKeys={categoryFilter ? [categoryFilter] : undefined}
+          showScrollIndicators={true}
           label="Filter by category"
           className="max-w-xs"
           onChange={(e) => {
