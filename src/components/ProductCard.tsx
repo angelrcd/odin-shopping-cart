@@ -36,12 +36,18 @@ export default function ProductCard({ product }: Props) {
           src={thumbnail}
           width={270}
         />
+        <Chip radius="sm" color="primary" className="relative bottom-7 z-50">
+          -{discountPercentage}%
+        </Chip>
       </CardBody>
       <CardFooter className="flex justify-between">
-        <Chip color="primary">${price}</Chip>
-        <p>
-          -{discountPercentage}% - Rating: {rating}
-        </p>
+        <div className="flex items-center gap-4">
+          <p className="text-lg font-semibold text-primary-500">${price}</p>
+          <p className="text-default-500 line-through">
+            ${(price * (1 + discountPercentage / 100)).toFixed(2)}
+          </p>
+        </div>
+        <p>Rating: {rating.toFixed(2)}</p>
       </CardFooter>
     </Card>
   );
