@@ -22,7 +22,7 @@ export default function Shop() {
       <h2>Shop</h2>
       <div className="mb-6 flex flex-wrap gap-4">
         <Select
-          selectedKeys={categoryFilter ? [categoryFilter] : undefined}
+          selectedKeys={categoryFilter ? [categoryFilter] : []}
           showScrollIndicators={true}
           label="Filter by category"
           className="max-w-xs"
@@ -45,7 +45,7 @@ export default function Shop() {
         </Select>
 
         <Select
-          selectedKeys={sortBySelection ? [sortBySelection] : undefined}
+          selectedKeys={sortBySelection ? [sortBySelection] : []}
           label="Sort by"
           className="max-w-xs"
           onChange={(e) => {
