@@ -5,12 +5,21 @@ import { useProducts } from "../utils/useProducts";
 import { Spinner } from "@nextui-org/react";
 import ProductCard from "../components/ProductCard";
 import { useSearchParams } from "react-router-dom";
+import SearchBar from "../components/SearchBar";
+import { useState } from "react";
 
 export default function Shop() {
-  const [searchParams, setSearchParams] = useSearchParams();
   const categories = useLoaderData() as Category[];
+
+  const [searchParams, setSearchParams] = useSearchParams();
   const categoryFilter = searchParams.get("category");
   const sortBySelection = searchParams.get("sort");
+
+  const [searchValue, setSearchValue] = useState("");
+  const handleSearchChange = (newValue: string) => {
+    setSearchValue(newValue);
+  };
+
   const { products, error, loading } = useProducts(categoryFilter);
 
   if (error) {
@@ -20,6 +29,9 @@ export default function Shop() {
   return (
     <main className="mx-auto max-w-[1024px] px-6">
       <h2>Shop</h2>
+      <div className="mb-4 max-w-xs">
+        <SearchBar value={searchValue} onChange={handleSearchChange} />
+      </div>
       <div className="mb-6 flex flex-wrap gap-4">
         <Select
           selectedKeys={categoryFilter ? [categoryFilter] : []}
@@ -79,6 +91,9 @@ export default function Shop() {
               if (sortBySelection === "") return 0;
               return a[sortBySelection] - b[sortBySelection];
             })
+            .filter((product) =>
+              product.title.toLowerCase().includes(searchValue.toLowerCase())
+            )
             .map((product) => (
               <ProductCard key={product.id} product={product} />
             ))}
