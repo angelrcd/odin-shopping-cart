@@ -7,6 +7,8 @@ import {
   Image,
   Chip,
 } from "@nextui-org/react";
+import ProductQuantifier from "./ProductQuantifier";
+import { useCart } from "../App";
 import { useNavigate } from "react-router-dom";
 
 interface Props {
@@ -14,6 +16,9 @@ interface Props {
 }
 
 export default function ProductCard({ product }: Props) {
+  const { addProductToCart, removeProductFromCart, ammountInCart } = useCart();
+  const amountOfProductInCard = ammountInCart(product);
+
   const navigate = useNavigate();
   const { id, title, price, category, thumbnail, discountPercentage, rating } =
     product;
@@ -50,6 +55,11 @@ export default function ProductCard({ product }: Props) {
         </div>
         <p>Rating: {rating.toFixed(2)}</p>
       </CardFooter>
+      <ProductQuantifier
+        onProductAdd={() => addProductToCart(product)}
+        onProductRemove={() => removeProductFromCart(product)}
+        productAmount={amountOfProductInCard}
+      />
     </Card>
   );
 }
