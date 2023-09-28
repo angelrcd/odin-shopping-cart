@@ -1,9 +1,12 @@
 import { Product } from "../vite-env";
 
-export async function productLoader(id?: string) {
-  console.log(id);
+const cache: Record<string, Product> = {};
+
+export async function productLoader(id: string) {
+  if (cache[id]) return cache[id];
 
   const response = await fetch(`https://dummyjson.com/products/${id}`);
   const productData = (await response.json()) as Product;
+  cache[id] = productData;
   return productData;
 }

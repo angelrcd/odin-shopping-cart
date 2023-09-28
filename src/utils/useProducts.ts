@@ -30,6 +30,8 @@ function isProduct(obj: unknown): obj is Product {
   );
 }
 
+const cache: Record<string, Product[]> = {};
+
 export const useProducts = (category: string | null) => {
   const [products, setProducts] = useState<Product[]>([]);
   const [error, setError] = useState<string | null>(null);
@@ -39,23 +41,31 @@ export const useProducts = (category: string | null) => {
     ? `https://dummyjson.com/products/category/${category}`
     : "https://dummyjson.com/products?limit=0";
 
+  // Looks up in cache first, if it doesn't exist yet it fetches and catches the products
   useEffect(() => {
-    fetch(url)
-      .then((response) => response.json())
-      .then((data: { products: unknown[] }) => {
-        const products = data.products;
+    if (cache[url]) {
+      const data = cache[url];
+      setProducts(data);
+      setLoading(false);
+    } else {
+      fetch(url)
+        .then((response) => response.json())
+        .then((data: { products: unknown[] }) => {
+          const products = data.products;
 
-        if (products.every(isProduct)) {
-          setProducts(products);
-        } else {
-          throw new Error("unexpected response");
-        }
-      })
-      .catch((err: string) => {
-        console.log(err);
-        setError(err);
-      })
-      .finally(() => setLoading(false));
+          if (products.every(isProduct)) {
+            setProducts(products);
+            cache[url] = products;
+          } else {
+            throw new Error("unexpected response");
+          }
+        })
+        .catch((err: string) => {
+          console.log(err);
+          setError(err);
+        })
+        .finally(() => setLoading(false));
+    }
 
     return () => {
       setProducts([]);
