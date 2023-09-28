@@ -6,7 +6,7 @@ import { Product } from "./vite-env";
 export default function App() {
   const [cart, setCart] = useState<Product[]>([]);
 
-  // Helper function to work with cart
+  // Helper functions to handle cart
   const addProductToCart = (product: Product) => {
     setCart([...cart, product]);
   };

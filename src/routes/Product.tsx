@@ -42,6 +42,7 @@ export default function Product() {
                   index === imgageInView ? "border-1 border-black p-1" : ""
                 }
                 width={100}
+                height={80}
                 alt="NextUI hero Image"
                 src={image}
               />

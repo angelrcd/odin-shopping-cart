@@ -13,7 +13,7 @@ export default function SearchBar({ value, onChange }: SearchBarProps) {
       onClear={() => onChange("")}
       label="Search"
       isClearable
-      placeholder="Type to search..."
+      placeholder="Search product"
       startContent={<SearchIcon size={15} strokeWidth={3} />}
     />
   );

@@ -29,7 +29,7 @@ export default function Shop() {
   return (
     <main className="mx-auto max-w-[1024px] px-6">
       <h2>Shop</h2>
-      <div className="mb-4 max-w-xs">
+      <div className="mb-4 max-w-full">
         <SearchBar value={searchValue} onChange={handleSearchChange} />
       </div>
       <div className="mb-6 flex flex-wrap gap-4">
@@ -37,7 +37,7 @@ export default function Shop() {
           selectedKeys={categoryFilter ? [categoryFilter] : []}
           showScrollIndicators={true}
           label="Filter by category"
-          className="max-w-xs"
+          className="flex-shrink flex-grow basis-40"
           onChange={(e) => {
             console.log(e.target.value);
 
@@ -59,7 +59,7 @@ export default function Shop() {
         <Select
           selectedKeys={sortBySelection ? [sortBySelection] : []}
           label="Sort by"
-          className="max-w-xs"
+          className="flex-shrink flex-grow basis-40"
           onChange={(e) => {
             console.log(e.target.value);
 
@@ -91,8 +91,15 @@ export default function Shop() {
               if (sortBySelection === "") return 0;
               return a[sortBySelection] - b[sortBySelection];
             })
-            .filter((product) =>
-              product.title.toLowerCase().includes(searchValue.toLowerCase())
+            .filter(
+              (product) =>
+                product.title
+                  .toLowerCase()
+                  .includes(searchValue.toLowerCase()) ||
+                product.category
+                  .toLowerCase()
+                  .includes(searchValue.toLowerCase()) ||
+                product.brand.toLowerCase().includes(searchValue.toLowerCase())
             )
             .map((product) => (
               <ProductCard key={product.id} product={product} />

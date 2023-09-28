@@ -31,12 +31,13 @@ export default function ProductCard({ product }: Props) {
       </CardHeader>
       <CardBody className="justify-center overflow-visible py-2">
         <Image
-          alt="Card background"
+          width={1000}
+          height={500}
+          alt={title}
           className="rounded-xl object-cover"
           src={thumbnail}
-          width={270}
         />
-        <Chip radius="sm" color="primary" className="relative bottom-7 z-50">
+        <Chip radius="sm" color="primary" className="relative bottom-7 z-10">
           -{discountPercentage}%
         </Chip>
       </CardBody>
