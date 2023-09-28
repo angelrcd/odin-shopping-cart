@@ -35,7 +35,7 @@ export default function Product() {
       <div className="flex flex-wrap gap-4">
         <div className="flex gap-1 md:flex-col">
           {images.map((image, index) => (
-            <button onClick={() => setImageInView(index)}>
+            <button key={index} onClick={() => setImageInView(index)}>
               <Image
                 radius="none"
                 className={

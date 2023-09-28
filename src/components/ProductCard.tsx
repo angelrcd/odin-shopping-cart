@@ -10,6 +10,7 @@ import {
 import ProductQuantifier from "./ProductQuantifier";
 import { useCart } from "../App";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 interface Props {
   product: Product;
@@ -26,7 +27,6 @@ export default function ProductCard({ product }: Props) {
     <Card
       onPress={() => navigate(id.toString())}
       fullWidth={true}
-      isPressable={true}
       className="py-4 hover:scale-105">
       <CardHeader className="flex-col items-start px-4 pb-0 pt-2">
         <small className="text-default-500">
@@ -45,6 +45,9 @@ export default function ProductCard({ product }: Props) {
         <Chip radius="sm" color="primary" className="relative bottom-7 z-10">
           -{discountPercentage}%
         </Chip>
+        <Link className="text-primary-500 underline" to={id.toString()}>
+          See details
+        </Link>
       </CardBody>
       <CardFooter className="flex justify-between">
         <div className="flex items-center gap-4">
