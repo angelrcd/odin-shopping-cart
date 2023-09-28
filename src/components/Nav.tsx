@@ -53,11 +53,16 @@ export default function Nav({ cartSize }: Props) {
         </NavbarItem>
         <NavbarItem className="hidden xs:flex">
           <NavLink
+            aria-label="Cart"
             to="/cart"
             className={({ isActive, isPending }) =>
               isPending ? "pending" : isActive ? "text-blue-600" : ""
             }>
-            <Badge color="primary" content={cartSize} shape="circle">
+            <Badge
+              data-testid="Items in cart"
+              color="primary"
+              content={cartSize}
+              shape="circle">
               <CartIcon size={30} />
             </Badge>
           </NavLink>
