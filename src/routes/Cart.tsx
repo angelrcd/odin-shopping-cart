@@ -1,6 +1,7 @@
 import { useCart } from "../App";
 import * as _ from "lodash";
 import {
+  Button,
   Table,
   TableHeader,
   TableBody,
@@ -81,6 +82,14 @@ export default function Cart() {
           )}
         </TableBody>
       </Table>
+      <div className="flex justify-end">
+        <Button
+          size="lg"
+          radius="full"
+          className="mt-2 w-fit bg-gradient-to-tr from-primary-200 to-primary-600  font-semibold uppercase text-white shadow-lg hover:scale-110">
+          checkout
+        </Button>
+      </div>
     </main>
   );
 }

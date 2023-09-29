@@ -50,7 +50,7 @@ export default function Product() {
           ))}
         </div>
         <div>
-          <Chip color="default" className="relative left-5 top-10 z-50">
+          <Chip color="default" className="relative left-5 top-10 z-20">
             {imgageInView + 1} / {images.length}
           </Chip>
           <Image
@@ -74,11 +74,13 @@ export default function Product() {
         </p>
         <p className="text-primary-500">-{discountPercentage}%</p>
       </div>
-      <ProductQuantifier
-        onProductAdd={() => addProductToCart(product)}
-        onProductRemove={() => removeProductFromCart(product)}
-        productAmount={amountOfProductInCard}
-      />
+      <div className="mb-4">
+        <ProductQuantifier
+          onProductAdd={() => addProductToCart(product)}
+          onProductRemove={() => removeProductFromCart(product)}
+          productAmount={amountOfProductInCard}
+        />
+      </div>
     </main>
   );
 }

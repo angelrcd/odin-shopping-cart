@@ -1,4 +1,5 @@
 import { Button, ButtonGroup } from "@nextui-org/react";
+import { Tooltip } from "@nextui-org/react";
 
 interface Props {
   onProductAdd: () => void;
@@ -13,11 +14,15 @@ export default function ProductQuantifier({
 }: Props) {
   return (
     <ButtonGroup>
-      <Button isDisabled={productAmount === 0} onPress={onProductRemove}>
-        -
-      </Button>
+      <Tooltip content="Remove product from cart">
+        <Button isDisabled={productAmount === 0} onPress={onProductRemove}>
+          -
+        </Button>
+      </Tooltip>
       <div className="px-4">Cart {productAmount}</div>
-      <Button onPress={onProductAdd}>+</Button>
+      <Tooltip content="Add product to cart">
+        <Button onPress={onProductAdd}>+</Button>
+      </Tooltip>
     </ButtonGroup>
   );
 }
