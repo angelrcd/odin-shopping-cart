@@ -13,7 +13,12 @@ export default function Shop() {
 
   const [searchParams, setSearchParams] = useSearchParams();
   const categoryFilter = searchParams.get("category");
-  const sortBySelection = searchParams.get("sort");
+  const sortBySelection = searchParams.get("sort") as
+    | "price"
+    | "discountPercentage"
+    | "rating"
+    | ""
+    | null;
 
   const [searchValue, setSearchValue] = useState("");
   const handleSearchChange = (newValue: string) => {
@@ -84,11 +89,11 @@ export default function Shop() {
 
         {loading && <Spinner className="ml-4" />}
       </div>
-      <div className="grid grid-cols-1 gap-4 xs:grid-cols-2 md:grid-cols-3">
+      <div className="grid grid-cols-1 gap-4 min-[520px]:grid-cols-2 md:grid-cols-3">
         {products.length > 0 &&
           products
             .sort((a, b) => {
-              if (sortBySelection === "") return 0;
+              if (sortBySelection === "" || sortBySelection === null) return 0;
               return a[sortBySelection] - b[sortBySelection];
             })
             .filter(

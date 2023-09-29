@@ -1,4 +1,4 @@
-import { render, screen, waitFor } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import { expect } from "vitest";
 import { describe, it } from "vitest";
 import { createMemoryRouter, RouterProvider } from "react-router-dom";

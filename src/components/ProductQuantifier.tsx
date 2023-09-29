@@ -19,7 +19,7 @@ export default function ProductQuantifier({
           -
         </Button>
       </Tooltip>
-      <div className="px-4">Cart {productAmount}</div>
+      <div className="px-4">{productAmount}</div>
       <Tooltip content="Add product to cart">
         <Button onPress={onProductAdd}>+</Button>
       </Tooltip>
