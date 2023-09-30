@@ -1,19 +1,19 @@
-import { useState } from "react";
+import { useReducer } from "react";
+import reducer from "./utils/cartReducer";
 import Nav from "./components/Nav";
 import { Outlet, useOutletContext } from "react-router-dom";
 import { Product } from "./vite-env";
 
 export default function App() {
-  const [cart, setCart] = useState<Product[]>([]);
+  const [cart, dispatch] = useReducer(reducer, []);
 
   // Helper functions to handle cart
   const addProductToCart = (product: Product) => {
-    setCart([...cart, product]);
+    dispatch({ type: "added_product", product: product });
   };
 
   const removeProductFromCart = (product: Product) => {
-    const i = cart.findIndex((p) => p.id === product.id);
-    setCart([...cart.slice(0, i), ...cart.slice(i + 1)]);
+    dispatch({ type: "removed_product", product: product });
   };
 
   const ammountInCart = (product: Product): number => {

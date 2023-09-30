@@ -2,12 +2,6 @@
 
 export interface Product {
   id: number;
-  name: string;
-  description: string;
-}
-
-export interface Product {
-  id: number;
   title: string;
   description: string;
   price: number;
@@ -18,11 +12,6 @@ export interface Product {
   category: string;
   thumbnail: string;
   images: string[];
-}
-
-export interface Rating {
-  rate: number;
-  count: number;
 }
 
 export type Category = string;
