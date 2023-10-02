@@ -1,4 +1,5 @@
 import { useCart } from "../App";
+import { useMemo } from "react";
 import * as _ from "lodash";
 import {
   Button,
@@ -14,11 +15,12 @@ import { Link } from "react-router-dom";
 
 export default function Cart() {
   const { cart } = useCart();
-  const totalPrice = cart.reduce((acc, current) => acc + current.price, 0);
-
-  const cartGrouped = _.groupBy(cart, "id");
-  console.table(cartGrouped);
-  console.log(Object.values(cartGrouped));
+  const [totalPrice, cartGrouped] = useMemo(() => {
+    return [
+      cart.reduce((acc, current) => acc + current.price, 0),
+      _.groupBy(cart, "id"),
+    ];
+  }, [cart]);
 
   const rows = Object.values(cartGrouped).map((productGroup) => {
     return {
