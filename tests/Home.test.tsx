@@ -29,7 +29,11 @@ function setup() {
 
 it("Home display lema text", () => {
   setup();
-  expect(screen.getByText("This store is really cool!")).toBeInTheDocument();
+  expect(
+    screen.getByText(
+      "Unleash Your Shopping Desires, Explore Endless Possibilities!"
+    )
+  ).toBeInTheDocument();
 });
 
 it("Action button redirects you to /shop", async () => {
