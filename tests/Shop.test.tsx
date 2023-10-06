@@ -3,7 +3,6 @@ import { expect } from "vitest";
 import { it } from "vitest";
 import { createMemoryRouter, RouterProvider } from "react-router-dom";
 import userEvent from "@testing-library/user-event";
-import { useCart } from "../src/App";
 import * as exports from "../src/utils/useProducts";
 import {
   mockedProduct1,

@@ -21,13 +21,16 @@ export default function Nav({ cartSize }: Props) {
 
   return (
     <Navbar
+      className="text-gray-800"
       shouldHideOnScroll
       isMenuOpen={isMenuOpen}
       onMenuOpenChange={setIsMenuOpen}>
       <NavbarContent>
         <NavbarBrand>
           <Link to="/">
-            <h1>FAKE STORE</h1>
+            <h1 className="text-lg font-semibold uppercase">
+              One Stop Wonders
+            </h1>
           </Link>
         </NavbarBrand>
       </NavbarContent>

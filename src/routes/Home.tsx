@@ -1,6 +1,5 @@
 import { Button } from "@nextui-org/react";
 import { useNavigate } from "react-router-dom";
-import { Card } from "@nextui-org/react";
 import GithubIcon from "../components/GithubIcon";
 
 export default function Home() {
@@ -14,15 +13,17 @@ export default function Home() {
           </h2>
           <p className="py-5 text-xl leading-normal text-gray-500 lg:text-xl xl:text-2xl">
             Welcome to our one-stop destination for all your shopping needs!
-            ssFrom cutting-edge electronics to the latest fashion trends, we
-            have it all.
+            From cutting-edge electronics to the latest fashion trends, we have
+            it all.
           </p>
           <div className="flex flex-wrap gap-2">
             <Button onPress={() => navigate("/shop")} size="lg" color="primary">
               See products
             </Button>
             <Button startContent={<GithubIcon />} size="lg">
-              <a href="">View on Github</a>
+              <a href="https://github.com/angelrcd/odin-shopping-cart">
+                View on Github
+              </a>
             </Button>
           </div>
         </div>

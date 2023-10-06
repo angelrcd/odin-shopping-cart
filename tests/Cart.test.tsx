@@ -1,16 +1,10 @@
 import { render, screen } from "@testing-library/react";
 import { expect } from "vitest";
-import { describe, it, afterEach } from "vitest";
-import userEvent from "@testing-library/user-event";
-import {
-  mockedProduct1,
-  mockedProduct2,
-  mockedProduct3,
-} from "../src/utils/mockedProducts";
+import { it, afterEach } from "vitest";
+import { mockedProduct1 } from "../src/utils/mockedProducts";
 import { createMemoryRouter, RouterProvider } from "react-router-dom";
 import * as hooks from "../src/App";
 import Cart from "../src/routes/Cart";
-import { type Product } from "../src/vite-env";
 import { within } from "@testing-library/react";
 
 function setup() {
